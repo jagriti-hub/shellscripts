@@ -1,0 +1,17 @@
+{
+    "AWSAccountId": {
+        "Type": "Number",
+        "Mandatory": true,
+        "Default": "014840411162"
+    },
+    "AWSRegion": {
+        "Type": "String",
+        "Mandatory": true,
+        "Default": "us-east-1"
+    },
+    "Tag": {
+        "Type": "String",
+        "Mandatory": true,
+        "Default": "latest"
+    }
+}

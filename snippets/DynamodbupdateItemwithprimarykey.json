@@ -1,0 +1,25 @@
+{
+  "data_code": "dynamodb=boto3.resource('dynamodb',region_name='us-east-1')\n",
+  "dbtype": "dynamodb",
+  "function_call": "SNIPPETID_output = SNIPPETID(SNIPPETID_input)\n",
+  "function_code": "def SNIPPETID(SNIPPETID_input):\n  try:\n    table=dynamodb.Table('TABLENAME')\n    data = table.update_item(\n      Key = {'PRIMARYKEY': SNIPPETID_input[\"PRIMARYKEY\"]},\n      UpdateExpression = 'SET #k=:value',\n      ExpressionAttributeNames={'#k': SNIPPETID_input[\"updatekey\"]},\n      ExpressionAttributeValues = {':value': SNIPPETID_input[\"updatevalue\"]}\n    )\n    message = {\"status_code\":200,\"body\": data}\n  except Exception as e:\n    message = {\"status_code\":400, \"body\": str(e)}\n  return(message)\n",
+  "import_code": "import boto3,json\n",
+  "keys": "primary",
+  "language": "python3.6",
+  "methodpath": "/TABLENAME/{PRIMARYKEY}",
+  "methodtype": "PATCH",
+  "name": "Dynamodb update Item with primary key",
+  "replacevariables": [
+    "PRIMARYKEY",
+    "TABLENAME",
+    "REGION"
+  ],
+  "requirements": [
+    "flask",
+    "gunicorn",
+    "requests",
+    "boto3"
+  ],
+  "servicetype": "dynamodb_eks_flask",
+  "version": "1"
+}

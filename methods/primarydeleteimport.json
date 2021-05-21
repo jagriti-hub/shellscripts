@@ -1,0 +1,13 @@
+{
+  "dbtype": "dynamodb",
+  "keys": "primary",
+  "language": "python3.6",
+  "methodpath": "/TABLENAME/{PRIMARYKEY}",
+  "methodtype": "DELETE",
+  "servicetype": "dynamodb_eks_flask",
+  "snippets": {
+
+  },
+  "templateid": "primarydeleteimport",
+  "type_code": "METHODID = Blueprint('METHODID', __name__)\n@METHODID.route('METHODPATH', methods=['DELETE'])\ndef main(PRIMARYKEY):\n  Input={}\n  Input.update({'PRIMARYKEY': PRIMARYKEY})\n  return archeplay(Input)\n"
+}

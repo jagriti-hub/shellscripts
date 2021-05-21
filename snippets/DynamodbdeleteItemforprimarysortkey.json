@@ -1,0 +1,26 @@
+{
+  "data_code": "dynamodb=boto3.resource('dynamodb',region_name='us-east-1')\n",
+  "dbtype": "dynamodb",
+  "function_call": "SNIPPETID_output = SNIPPETID(SNIPPETID_input)\n",
+  "function_code": "def SNIPPETID(SNIPPETID_input):\n  try:\n    table=dynamodb.Table('TABLENAME')\n    kwargs={\n      'Key': {'PRIMARYKEY':SNIPPETID_input['PRIMARYKEY'],'SORTKEY': SNIPPETID_input['SORTKEY']}\n    }\n    data=table.delete_item(**kwargs)\n    message={\n      \"status_code\": 200,\n      \"body\": data\n    }\n  except Exception as e:\n    message={\n      \"status_code\": 400,\n      \"body\": str(e)\n    }\n  return(message)\n",
+  "import_code": "import boto3,json\n",
+  "keys": "primary_sort",
+  "language": "python3.6",
+  "methodpath": "/TABLENAME/{PRIMARYKEY}/{SORTKEY}",
+  "methodtype": "DELETE",
+  "name": "Dynamodb delete Item for primary sort key",
+  "replacevariables": [
+    "PRIMARYKEY",
+    "SORTKEY",
+    "TABLENAME",
+    "REGION"
+  ],
+  "requirements": [
+    "boto3",
+    "flask",
+    "gunicorn",
+    "requests"
+  ],
+  "servicetype": "dynamodb_eks_flask",
+  "version": "1"
+}

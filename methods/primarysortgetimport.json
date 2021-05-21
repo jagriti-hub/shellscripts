@@ -1,0 +1,13 @@
+{
+  "dbtype": "dynamodb",
+  "keys": "primary_sort",
+  "language": "python3.6",
+  "methodpath": "/TABLENAME/{PRIMARYKEY}/{SORTKEY}",
+  "methodtype": "GET",
+  "servicetype": "dynamodb_eks_flask",
+  "snippets": {
+
+  },
+  "templateid": "primarysortgetimport",
+  "type_code": "METHODID = Blueprint('METHODID', __name__)\n@METHODID.route('METHODPATH', methods=['GET'])\ndef main(PRIMARYKEY,SORTKEY):\n  Input={}\n  Input.update({'PRIMARYKEY': PRIMARYKEY,'SORTKEY': SORTKEY})\n  return archeplay(Input)\n"
+}

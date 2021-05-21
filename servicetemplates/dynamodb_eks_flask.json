@@ -1,0 +1,269 @@
+{
+    "API Platform": "API Gateway",
+    "Auth": "AWS Cognito",
+    "Cloud": "AWS",
+    "DB": "DynamoDB",
+    "Deploy Platform": "EKS",
+    "Language": "Python",
+    "optionname": "deployeksservice",
+    "servicetype": "dynamodb_eks_flask",
+    "WEB Platform": "Flask",
+    "deploysteps": {
+        "steporder": [
+            "vpc",
+            "eks",
+            "tables",
+            "build",
+            "helm",
+            "apigw"
+        ],
+        "tables": {
+            "tasks": [{
+                "Delete": {
+                    "args": [
+                        "SERVICEID"
+                    ],
+                    "Filename": "$CLONE_PATH/PATHPARAM/delete.sh",
+                    "Type": "bash"
+                },
+                "tasktype": "cloudformation",
+                "filepath": "deploysteps/tables",
+                "Create": {
+                    "args": [
+                        "SERVICEID"
+                    ],
+                    "Filename": "$CLONE_PATH/PATHPARAM/create.sh",
+                    "Type": "bash"
+                },
+                "taskno": 1.0,
+                "description": "This section deployes dynamodb tables using cloudformation",
+                "taskname": "dynamodb",
+                "Update": {
+                    "args": [
+                        "SERVICEID"
+                    ],
+                    "Filename": "$CLONE_PATH/PATHPARAM/update.sh",
+                    "Type": "bash"
+                },
+                "Generator": {
+                    "args": [
+                        "FILEPATH",
+                        "SERVICEID"
+                    ],
+                    "Filename": "PATHPARAM/generator.py",
+                    "Type": "python",
+                    "Requirements": ["boto3"]
+                }
+            }],
+            "description": "Deploy DynamoDB Tables",
+            "stepid": "tables",
+            "stepname": "Deploy DynamoDB Tables",
+            "hint": "Setup Code repo and aws cli before Running this task",
+            "title": "AWS Interface"
+        },
+        "apigw": {
+            "description": "Deploy apigw",
+            "hint": "Setup Code repo and aws cli before Running this task",
+            "stepid": "apigw",
+            "stepname": "Deploy apigw",
+            "tasks": [{
+                "Create": {
+                    "args": [
+                        "SERVICEID"
+                    ],
+                    "Filename": "$CLONE_PATH/PATHPARAM/create.sh",
+                    "Type": "bash"
+                },
+                "Delete": {
+                    "args": [
+                        "SERVICEID"
+                    ],
+                    "Filename": "$CLONE_PATH/PATHPARAM/delete.sh",
+                    "Type": "bash"
+                },
+                "description": "This section deployes apigw using cloudformation",
+                "filepath": "deploysteps/apigw",
+                "Generator": {
+                    "args": [
+                        "FILEPATH",
+                        "SERVICEID"
+                    ],
+                    "Filename": "PATHPARAM/generator.py",
+                    "Requirements": ["boto3"],
+                    "Type": "python"
+                },
+                "taskname": "apigw",
+                "taskno": 1,
+                "tasktype": "cloudformation",
+                "Update": {
+                    "args": [
+                        "SERVICEID"
+                    ],
+                    "Filename": "$CLONE_PATH/PATHPARAM/update.sh",
+                    "Type": "bash"
+                }
+            }],
+            "title": "AWS Interface"
+        },
+        "vpc": {
+            "description": "Deploy VPC",
+            "hint": "install aws cli before Running this task",
+            "stepid": "vpc",
+            "stepname": "Deploy VPC",
+            "tasks": [{
+                "Create": {
+                    "args": [
+                        "SERVICEID"
+                    ],
+                    "Filename": "$CLONE_PATH/PATHPARAM/create.sh",
+                    "Type": "bash"
+                },
+                "Delete": {
+                    "args": [
+                        "SERVICEID"
+                    ],
+                    "Filename": "$CLONE_PATH/PATHPARAM/delete.sh",
+                    "Type": "bash"
+                },
+                "description": "This section deployes VPC, Subnets using cloudformation",
+                "filepath": "deploysteps/vpc",
+                "Generator": {
+                    "args": ["FILEPATH"],
+                    "Filename": "PATHPARAM/generator.py",
+                    "Requirements": ["boto3"],
+                    "Type": "python"
+                },
+                "taskname": "vpc",
+                "taskno": 1,
+                "tasktype": "cloudformation",
+                "Update": {
+                    "args": [
+                        "SERVICEID"
+                    ],
+                    "Filename": "$CLONE_PATH/PATHPARAM/update.sh",
+                    "Type": "bash"
+                }
+            }],
+            "title": "AWS Interface"
+        },
+        "build": {
+            "description": "Deploy build",
+            "hint": "Setup Code repo and aws cli before Running this task",
+            "stepid": "build",
+            "stepname": "Deploy build",
+            "tasks": [{
+                "Create": {
+                    "args": ["SERVICEID"],
+                    "Filename": "$CLONE_PATH/PATHPARAM/create.sh",
+                    "Type": "bash"
+                },
+                "Delete": {
+                    "args": ["SERVICEID"],
+                    "Filename": "$CLONE_PATH/PATHPARAM/delete.sh",
+                    "Type": "bash"
+                },
+                "description": "This section build the docker images",
+                "filepath": "deploysteps/build",
+                "Generator": {
+                    "args": [
+                        "FILEPATH",
+                        "SERVICEID"  
+                    ],
+                    "Filename": "PATHPARAM/generator.py",
+                    "Requirements": ["boto3"],
+                    "Type": "python"
+                },
+                "taskname": "build",
+                "taskno": 1,
+                "tasktype": "shell",
+                "Update": {
+                    "args": ["SERVICEID"],
+                    "Filename": "$CLONE_PATH/PATHPARAM/update.sh",
+                    "Type": "bash"
+                }
+            }],
+            "title": "AWS Interface"
+        },
+        "eks": {
+            "description": "Deploy eks",
+            "hint": "Setup Code repo and aws cli before Running this task",
+            "stepid": "eks",
+            "stepname": "Deploy eks",
+            "tasks": [{
+                "Create": {
+                    "args": [
+                        "SERVICEID"
+                    ],
+                    "Filename": "$CLONE_PATH/PATHPARAM/create.sh",
+                    "Type": "bash"
+                },
+                "Delete": {
+                    "args": [],
+                    "Filename": "$CLONE_PATH/PATHPARAM/delete.sh",
+                    "Type": "bash"
+                },
+                "description": "This section deploys the eks",
+                "filepath": "deploysteps/eks",
+                "Generator": {
+                    "args": [
+                        "FILEPATH",
+                        "SERVICEID"
+                    ],
+                    "Filename": "PATHPARAM/generator.py",
+                    "Requirements": ["boto3"],
+                    "Type": "python"
+                },
+                "taskname": "eks",
+                "taskno": 1,
+                "tasktype": "shell",
+                "Update": {
+                    "args": [
+                        "SERVICEID"
+                    ],
+                    "Filename": "$CLONE_PATH/PATHPARAM/update.sh",
+                    "Type": "bash"
+                }
+            }],
+            "title": "AWS Interface"
+        },
+        "helm": {
+            "description": "Deploy helm",
+            "hint": "Setup Code repo and aws cli before Running this task",
+            "stepid": "helm",
+            "stepname": "Deploy helm",
+            "tasks": [{
+                "Create": {
+                    "args": ["SERVICEID"],
+                    "Filename": "$CLONE_PATH/PATHPARAM/create.sh",
+                    "Type": "bash"
+                },
+                "Delete": {
+                    "args": ["SERVICEID"],
+                    "Filename": "$CLONE_PATH/PATHPARAM/delete.sh",
+                    "Type": "bash"
+                },
+                "description": "This section build the helm charts",
+                "filepath": "deploysteps/helm",
+                "Generator": {
+                    "args": [
+                        "FILEPATH",
+                        "SERVICEID"
+                    ],
+                    "Filename": "PATHPARAM/generator.py",
+                    "Requirements": ["pyyaml"],
+                    "Type": "python"
+                },
+                "taskname": "helm",
+                "taskno": 1,
+                "tasktype": "shell",
+                "Update": {
+                    "args": ["SERVICEID"],
+                    "Filename": "$CLONE_PATH/PATHPARAM/update.sh",
+                    "Type": "bash"
+                }
+            }],
+            "title": "AWS Interface"
+        }
+    }
+
+}

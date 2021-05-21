@@ -1,0 +1,42 @@
+{
+    "VpcCIDR": {
+        "Type": "String",
+        "Mandatory": true,
+        "value": "10.0.0.0/16"
+    },
+    "PublicSubnet1CIDR": {
+        "Type": "String",
+        "Mandatory": true,
+        "value": "10.0.0.0/19"
+    },
+    "PublicSubnet2CIDR": {
+        "Type": "String",
+        "Mandatory": true,
+        "value": "10.0.32.0/19"
+    },
+    "PrivateSubnet1CIDR": {
+        "Type": "String",
+        "Mandatory": true,
+        "value": "10.0.64.0/19"
+    },
+    "PrivateSubnet2CIDR": {
+        "Type": "String",
+        "Mandatory": true,
+        "value": "10.0.96.0/19"
+    },
+    "PrivateSubnet2CIDR": {
+        "Type": "String",
+        "Mandatory": true,
+        "value": "10.0.96.0/19"
+    },
+    "VPCStackName": {
+        "Type": "String",
+        "Mandatory": true,
+        "value": "VpcStack"
+    },
+    "AWSRegion": {
+        "Type": "String",
+        "Mandatory": true,
+        "value": "us-east-1"
+    }
+}

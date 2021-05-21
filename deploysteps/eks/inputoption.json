@@ -1,0 +1,47 @@
+{
+    "Clustername": {
+        "Type": "String",
+        "Mandatory": true,
+        "Default": "testcluster"
+    },
+    "DesiredCapacity": {
+        "Type": "Number",
+        "Mandatory": true,
+        "Default": 3
+    },
+    "InstanceType": {
+        "Type": "String",
+        "Mandatory": true,
+        "Default": "t3a.medium"
+    },
+    "MinSize": {
+        "Type": "Number",
+        "Mandatory": true,
+        "Default": 1
+    },
+    "MaxSize": {
+        "Type": "Number",
+        "Mandatory": true,
+        "Default": 3
+    },
+    "NodeGrpName": {
+        "Type": "String",
+        "Mandatory": true,
+        "Default": "nodegrp1"
+    },
+    "Volume": {
+        "Type": "Number",
+        "Mandatory": true,
+        "Default": 20
+    },
+    "KeyName": {
+        "Type": "String",
+        "Mandatory": true,
+        "Default": "guacamole-test"
+    },
+    "AWSRegion": {
+        "Type": "String",
+        "Mandatory": true,
+        "Default": "us-east-1"
+    }
+}

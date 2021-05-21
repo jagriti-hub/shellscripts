@@ -1,0 +1,52 @@
+{
+    "AutoscalingTargetDefault": {
+        "Type": "Number",
+        "Mandatory": true,
+        "Default": 50
+    },
+    "DeadlineSec": {
+        "Type": "Number",
+        "Mandatory": true,
+        "Default": 600
+    },
+    "MaxReplica": {
+        "Type": "Number",
+        "Mandatory": true,
+        "Default": 10
+    },
+    "MinReadySec": {
+        "Type": "Number",
+        "Mandatory": true,
+        "Default": 5
+    },
+    "MinReplica": {
+        "Type": "Number",
+        "Mandatory": true,
+        "Default": 2
+    },
+    "RevHistoryLim": {
+        "Type": "Number",
+        "Mandatory": true,
+        "Default": 5
+    },
+    "ServicePort": {
+        "Type": "Number",
+        "Mandatory": true,
+        "Default": 80
+    },
+    "ServiceTargatePort": {
+        "Type": "Number",
+        "Mandatory": true,
+        "Default": 80
+    },
+    "Clustername": {
+        "Type": "String",
+        "Mandatory": true,
+        "Default": "testcluster"
+    },
+    "AWSRegion": {
+        "Type": "String",
+        "Mandatory": true,
+        "Default": "us-east-1"
+    }
+}

@@ -1,0 +1,26 @@
+{
+  "data_code": "dynamodb=boto3.resource('dynamodb',region_name='us-east-1')\n",
+  "dbtype": "dynamodb",
+  "function_call": "SNIPPETID_output = SNIPPETID(SNIPPETID_input)\n",
+  "function_code": "def SNIPPETID(SNIPPETID_input):\n  try:\n    table=dynamodb.Table('TABLENAME')\n    data = table.query(KeyConditionExpression=Key(\"PRIMARYKEY\").eq(SNIPPETID_input['PRIMARYKEY']))[\"Items\"]\n    message={\n      \"status_code\": 200,\n      \"body\": data\n    }\n  except Exception as e:\n    message={\n      \"status_code\": 400,\n      \"body\": str(e)\n    }\n  return(message)\n",
+  "import_code": "import boto3,json \nfrom boto3.dynamodb.conditions import Key, Attr\n",
+  "keys": "primary_sort",
+  "language": "python3.6",
+  "methodpath": "/TABLENAME/{PRIMARYKEY}",
+  "methodtype": "GET",
+  "name": "Dynamodb query for primary sort key",
+  "replacevariables": [
+    "PRIMARYKEY",
+    "SORTKEY",
+    "TABLENAME",
+    "REGION"
+  ],
+  "requirements": [
+    "boto3",
+    "flask",
+    "gunicorn",
+    "requests"
+  ],
+  "servicetype": "dynamodb_eks_flask",
+  "version": "1"
+}

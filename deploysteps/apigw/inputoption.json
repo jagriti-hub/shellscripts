@@ -1,0 +1,12 @@
+{
+    "Cognitouserpoolarn": {
+        "Type": "String",
+        "Mandatory": true,
+        "Default": "arn:aws:cognito-idp:us-east-1:*****:userpool/us-east-1_****"
+    },
+    "Region": {
+        "Type": "String",
+        "Mandatory": true,
+        "Default": "us-east-1"
+    }
+}

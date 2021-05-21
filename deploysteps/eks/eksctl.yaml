@@ -1,0 +1,37 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: CLUSTERNAME
+  region: AWSREGION
+
+cloudWatch:
+  clusterLogging:
+    enableTypes: ["*"]
+    
+vpc:
+  subnets:
+    private:
+      PVTAZ1:
+        id: PVTSUBNETID1
+      PVTAZ2:
+        id: PVTSUBNETID2
+    public:
+      PUBAZ1:
+        id: PUBSUBNETID1
+      PUBAZ2:
+        id: PUBSUBNETID2
+
+iam:
+  withOIDC: true
+
+managedNodeGroups:
+- desiredcapacity: DESIREDCAPACITY
+  instanceType: INSTANCETYPE
+  maxSize: MAXSIZE
+  minSize: MINSIZE
+  name: NGNAME
+  volumesize: VOLUME
+  ssh:
+    allow: true
+    publicKeyName: KEYPAIRNAME

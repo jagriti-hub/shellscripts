@@ -1,0 +1,13 @@
+{
+  "dbtype": "dynamodb",
+  "keys": "primary",
+  "language": "python3.6",
+  "methodpath": "/TABLENAME/{PRIMARYKEY}",
+  "methodtype": "PATCH",
+  "servicetype": "dynamodb_eks_flask",
+  "snippets": {
+
+  },
+  "templateid": "primaryupdateimport",
+  "type_code": "METHODID = Blueprint('METHODID', __name__)\n@METHODID.route('METHODPATH', methods=['PATCH'])\ndef main(PRIMARYKEY):\n  Input = request.json[\"Item\"]\n  Input.update({'PRIMARYKEY': PRIMARYKEY})\n  return archeplay(Input)\n"
+}
